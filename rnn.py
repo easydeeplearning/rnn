@@ -118,12 +118,12 @@ for j in range(20000):
         layer_1 = layer_1_values[-timestep-1]
         prev_layer_1 = layer_1_values[-timestep-2]
         
-        # error at output layer
+        # erro da output layer
         layer_2_delta = layer_2_deltas[-timestep-1]
         # error at hidden layer
         layer_1_delta = (future_layer_1_delta.dot(weights_h.T) + layer_2_delta.dot(weights_1.T)) * sigmoid_output_to_derivative(layer_1)
 
-        # let's update all our weights so we can try again
+        # atualizacao dos pesos
         weights_1_update += np.atleast_2d(layer_1).T.dot(layer_2_delta)
         weights_h_update += np.atleast_2d(prev_layer_1).T.dot(layer_1_delta)
         weights_0_update += X.T.dot(layer_1_delta)
@@ -139,11 +139,11 @@ for j in range(20000):
     weights_1_update *= 0
     weights_h_update *= 0
     
-    # print out progress
+    # acompanhamento do progresso
     if(j % 1000 == 0):
         print ("Error:" + str(overallError))
-        print ("Pred:" + str(d))
         print ("True:" + str(c))
+        print ("Prediction:" + str(d))
         out = toDecimal(d)
         print (str(a_int) + " + " + str(b_int) + " = " + str(out))
         print ("------------")
